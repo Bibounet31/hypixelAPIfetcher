@@ -2,7 +2,7 @@ import requests
 import json
 
 # ahem, super secret key (hypixel api)
-key = { "API-Key": "8c21f916-d0c8-44f6-94d2-72cfdc888f62" }
+key = { "API-Key": "urapiKey" }
 
 
 
