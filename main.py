@@ -11,9 +11,6 @@ load_dotenv()
 key = os.getenv('Hypixel_API_Key')
 
 
-# ask player username
-name = input("please enter ur minecraft name: ")
-
 
 def GetMojangUUIDFromName(name):
     """Get user UUID using mojang API system"""
