@@ -34,7 +34,7 @@ def GetMojangUUIDFromName(name):
 
 
 
-def GetPlayerStats(key):
+def GetPlayerStats(key,name):
     """api request to hypixel"""
     print("waiting for hypixel's reply...")
     #response = requests.get("https://api.hypixel.net/v2/status", headers=key, params=playerid)
@@ -45,11 +45,11 @@ def GetPlayerStats(key):
     return response
 
 
-def WriteIntoFile():
+def WriteIntoFile(name):
     # writing result in a json file uwu
     print("writing result to file....")
     with open("data.json", "w") as f:
-        json.dump(GetPlayerStats(key).json(), f)
+        json.dump(GetPlayerStats(key,name).json(), f)
 
     print("writting into file done!")
 
@@ -60,7 +60,7 @@ def main():
     # ask player username
     name = input("please enter ur minecraft name: ")
 
-    WriteIntoFile()
+    WriteIntoFile(name)
 
 
 
