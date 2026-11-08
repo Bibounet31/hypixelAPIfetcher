@@ -1,3 +1,4 @@
+# imports
 import requests
 import json
 from dotenv import load_dotenv
@@ -11,8 +12,8 @@ key = os.getenv('Hypixel_API_Key')
 
 
 # ask player username
-
 name = input("please enter ur minecraft name: ")
+
 
 def GetMojangUUIDFromName(name):
     """Get user UUID using mojang API system"""
@@ -28,7 +29,6 @@ def GetMojangUUIDFromName(name):
         raise ValueError("seems like there's something wrong with mojang's reply! please try again") from None
 
 
-    
     # adding playerUID into a dict cuz thats how u send params to an api ig
     playerid = {"uuid" : playerUID}
 
@@ -37,26 +37,34 @@ def GetMojangUUIDFromName(name):
 
 
 
+def GetPlayerStats(key):
+    """api request to hypixel"""
+    print("waiting for hypixel's reply...")
+    #response = requests.get("https://api.hypixel.net/v2/status", headers=key, params=playerid)
 
-#api request to hypixel
-print("waiting for hypixel's reply...")
-#response = requests.get("https://api.hypixel.net/v2/status", headers=key, params=playerid)
+    response = requests.get("https://api.hypixel.net/v2/player", headers={"API-Key":key}, params=GetMojangUUIDFromName(name))
 
-response = requests.get("https://api.hypixel.net/v2/player", headers={"API-Key":key}, params=GetMojangUUIDFromName(name))
-
-#response = requests.get("https://api.hypixel.net/v2/recentgames", headers=key, params=playerid)
-
-
-# writing result in a json file uwu
-print("writing result to file....")
-with open("data.json", "w") as f:
-    json.dump(response.json(), f)
-
-print("done!")
+    #response = requests.get("https://api.hypixel.net/v2/recentgames", headers=key, params=playerid)
+    return response
 
 
+def WriteIntoFile():
+    # writing result in a json file uwu
+    print("writing result to file....")
+    with open("data.json", "w") as f:
+        json.dump(GetPlayerStats(key).json(), f)
 
-
+    print("writting into file done!")
 
 
 
+
+def main():
+    # ask player username
+    name = input("please enter ur minecraft name: ")
+
+    WriteIntoFile()
+
+
+
+main()
