@@ -10,6 +10,15 @@ load_dotenv()
 # ahem, super secret key (hypixel api)
 key = os.getenv('Hypixel_API_Key')
 
+def CheckAPIKey(key):
+    """check the validity of hypixel API key"""
+    if key == "urhypixelapikeyuwu" or len(key) < 20 :
+        print("Invalid key. Please insert ur api key into a .env")
+        return False
+
+    else:
+        return True
+
 
 
 def GetMojangUUIDFromName(name):
@@ -57,11 +66,11 @@ def WriteIntoFile(name):
 
 
 def main():
-    # ask player username
-    name = input("please enter ur minecraft name: ")
+    if CheckAPIKey(key):
+        # ask player username
+        name = input("please enter ur minecraft name: ")
 
-    WriteIntoFile(name)
+        WriteIntoFile(name)
 
 
 
-main()
